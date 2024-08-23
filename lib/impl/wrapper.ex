@@ -174,4 +174,19 @@ defmodule PatreonEx.Impl.Wrapper do
       {:error, _reason} = err -> err
     end
   end
+
+  def get_campaign_users(token, campaign_id, params) do
+    resp = http(
+      base_url(),
+      "GET",
+      "/api/oauth2/v2/campaigns/#{campaign_id}/members",
+      params,
+      [{"Authorization", "Bearer #{token}"}]
+    )
+
+    case resp do
+      {:ok, info} -> {:ok, Jason.decode!(info)}
+      {:error, _reason} = err -> err
+    end
+  end
 end

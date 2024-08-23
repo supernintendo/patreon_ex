@@ -96,4 +96,10 @@ defmodule PatreonEx do
 
   defdelegate get_campaigns(token, params), to: Wrapper
 
+  @doc """
+  Fetches the users for a given campaign
+  """
+  @spec get_campaign_users(binary, binary, map) :: map
+
+  defdelegate get_campaign_users(token, campaign_id, params), to: Wrapper
 end
