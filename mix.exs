@@ -5,7 +5,7 @@ defmodule PatreonEx.MixProject do
   def project do
     [
       app: :patreon_ex,
-      version: "0.1.1",
+      version: "0.1.2",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -28,7 +28,7 @@ defmodule PatreonEx.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:castore, "~> 0.1.0"},
+      {:castore, "~> 0.1.22"},
       {:mint, "~> 1.0"},
       {:jason, "~> 1.3"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
@@ -38,7 +38,7 @@ defmodule PatreonEx.MixProject do
   defp package do
     [
       licenses: ["Apache-2.0"],
-      maintainers: ["Chris Peralta"],
+      maintainers: ["Chris Peralta", "May Matyi"],
       links: %{
         "GitHub" => @source_url,
         "Patreon API Docs" => "https://docs.patreon.com/"
