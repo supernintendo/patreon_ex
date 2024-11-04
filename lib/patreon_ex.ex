@@ -57,7 +57,7 @@ defmodule PatreonEx do
   defdelegate validate_code(validation_code, redirect_uri, client_id, client_secret), to: Wrapper
 
   @doc """
-  This function is wraps a request to the `identity` endpoint.
+  This function wraps a request to the `identity` endpoint.
 
   Returns `map`
 
@@ -102,4 +102,42 @@ defmodule PatreonEx do
   @spec get_campaign_users(binary, binary, map) :: map
 
   defdelegate get_campaign_users(token, campaign_id, params), to: Wrapper
+
+  @doc """
+  Fetches posts for a given campaign.
+
+  ## Parameters
+    * `token` - Access token
+    * `campaign_id` - ID of the campaign to fetch posts from
+    * `params` - Optional parameters map for filtering and including related data
+
+  ## Examples
+      get_campaign_posts(
+        "access_token_here",
+        "12345",
+        %{
+          "include" => "campaign,user",
+          "fields[post]" => Enum.join(["title", "content", "published_at", "url"], ","),
+          "filter[is_draft]" => false,
+          "sort" => "-published_at"
+        }
+      )
+  """
+  @spec get_campaign_posts(binary, binary, map) :: map
+  defdelegate get_campaign_posts(token, campaign_id, params), to: Wrapper
+
+  @doc """
+  Refreshes an OAuth2 token using a refresh token.
+  Returns a map containing the new access_token and refresh_token on success.
+
+  ## Parameters
+    * `refresh_token` - The refresh token to use
+    * `client_id` - Your Patreon client ID
+    * `client_secret` - Your Patreon client secret
+
+  ## Examples
+      refresh_token("refresh_token_here", "client_id", "client_secret")
+  """
+  @spec refresh_token(binary, binary, binary) :: {:ok, map} | {:error, any}
+  defdelegate refresh_token(refresh_token, client_id, client_secret), to: Wrapper
 end

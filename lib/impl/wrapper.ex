@@ -189,4 +189,41 @@ defmodule PatreonEx.Impl.Wrapper do
       {:error, _reason} = err -> err
     end
   end
+
+  def get_campaign_posts(token, campaign_id, params) do
+    resp = http(
+      base_url(),
+      "GET",
+      "/api/oauth2/v2/campaigns/#{campaign_id}/posts",
+      params,
+      [{"Authorization", "Bearer #{token}"}]
+    )
+
+    case resp do
+      {:ok, info} -> {:ok, Jason.decode!(info)}
+      {:error, _reason} = err -> err
+    end
+  end
+
+  def refresh_token(refresh_token, client_id, client_secret) do
+    query = %{
+      grant_type: "refresh_token",
+      refresh_token: refresh_token,
+      client_id: client_id,
+      client_secret: client_secret
+    }
+
+    resp = http(
+      base_url(),
+      "POST",
+      "/api/oauth2/token",
+      query,
+      ["Content-Type: application/x-www-form-urlencoded"]
+    )
+
+    case resp do
+      {:ok, info} -> {:ok, Jason.decode!(info)}
+      {:error, _reason} = err -> err
+    end
+  end
 end
