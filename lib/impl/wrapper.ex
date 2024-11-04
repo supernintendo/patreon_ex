@@ -136,7 +136,7 @@ defmodule PatreonEx.Impl.Wrapper do
       "POST",
       "/api/oauth2/token",
       validate_query(validation_code, redirect_uri, client_id, client_secret),
-      ["Content-Type: application/x-www-form-urlencoded"]
+      [{"content-type", "application/x-www-form-urlencoded"}]
     )
 
     case resp do
@@ -218,7 +218,7 @@ defmodule PatreonEx.Impl.Wrapper do
       "POST",
       "/api/oauth2/token",
       query,
-      ["Content-Type: application/x-www-form-urlencoded"]
+      [{"content-type", "application/x-www-form-urlencoded"}]
     )
 
     case resp do
